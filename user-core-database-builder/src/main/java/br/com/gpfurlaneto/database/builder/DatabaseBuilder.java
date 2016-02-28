@@ -14,8 +14,8 @@ public class DatabaseBuilder {
 	
 	
 	public void Builder() {
-		Liquibase liquibase = new Liquibase("", ds.);
-		liquibase.update("");
+//		Liquibase liquibase = new Liquibase("", ds.);
+//		liquibase.update("");
 	}
 
 }

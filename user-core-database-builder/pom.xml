@@ -31,7 +31,7 @@
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
-				<targetPath>META-INF/</targetPath>
+				<targetPath>WEB-INF/</targetPath>
 				<excludes>
 					<exclude>**/*.java</exclude>
 				</excludes>

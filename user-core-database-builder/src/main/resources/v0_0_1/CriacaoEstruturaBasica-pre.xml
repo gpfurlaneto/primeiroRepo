@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+  
+    <changeSet id="1" author="Guilherm Furlaneto">
+        <createTable tableName="TB_USUARIO">
+            <column name="ID_USUARIO" type="long">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NM_USUARIO" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ST_ATIVO" type="boolean" defaultValueBoolean="true"/>
+        </createTable>
+    </changeSet>
+  
+</databaseChangeLog>

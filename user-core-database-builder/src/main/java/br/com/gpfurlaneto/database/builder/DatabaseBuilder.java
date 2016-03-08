@@ -16,25 +16,31 @@ import liquibase.resource.ClassLoaderResourceAccessor;
 
 public class DatabaseBuilder {
 
-	@Resource
-	private DataSource ds;
+	public String buildDatabase(Connection connection) throws Exception {
 
-	public void buildDatabase(Connection connection, String currentVersionCode) throws Exception {
-
-		SystemVersion currentSystemVersion = SystemVersion.valueOfCode(currentVersionCode);
-		SystemVersion newSystemVersion = null;
-		
-		if (currentSystemVersion == null) {
-			newSystemVersion = SystemVersion.V0_0_1;
-		}else{
-			newSystemVersion = currentSystemVersion.getPostSystemVersion();
-		}
+		SystemVersion newSystemVersion = SystemVersion.V0_0_1;
+		SystemVersion lastVersion = newSystemVersion;
 		
 		while (newSystemVersion != null) {
 			Database database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
-			Liquibase liquibase = new liquibase.Liquibase(newSystemVersion.getChangeLog(), new ClassLoaderResourceAccessor(), database);
-			liquibase.update(new Contexts(), new LabelExpression());
+			
+			if (newSystemVersion.hasChangeLogPre()) {
+				Liquibase liquibase = new liquibase.Liquibase(newSystemVersion.getChangeLogPre(), new ClassLoaderResourceAccessor(), database);
+				liquibase.update(new Contexts(), new LabelExpression());
+			}
+			
+			if (newSystemVersion.hasChangeLogPos()) {
+				Liquibase liquibase = new liquibase.Liquibase(newSystemVersion.getChangeLogPos(), new ClassLoaderResourceAccessor(), database);
+				liquibase.update(new Contexts(), new LabelExpression());
+				
+			}
+			
 			newSystemVersion = newSystemVersion.getPostSystemVersion();
+			if (newSystemVersion != null) {
+				lastVersion = newSystemVersion;
+			}
 		}
+		return lastVersion.getCode();
+		
 	}
 }

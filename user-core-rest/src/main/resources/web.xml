@@ -6,7 +6,6 @@
 
 
 	<servlet>
-
 		<servlet-name>Jersey Web Application</servlet-name>
 		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
 
@@ -21,5 +20,10 @@
 		<servlet-name>Jersey Web Application</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
+	
+	<listener>
+		<display-name>UserCoreInitializer</display-name>
+		<listener-class>br.com.gpfurlaneto.user.core.rest.initializer.UserCoreInitializer</listener-class>
+	</listener>
 
 </web-app>

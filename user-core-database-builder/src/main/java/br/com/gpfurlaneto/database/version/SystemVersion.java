@@ -2,17 +2,20 @@ package br.com.gpfurlaneto.database.version;
 
 public enum SystemVersion {
 
-	V0_0_1("0.0.1", null, "v0_0_1/changeLog-pre.xml");
+	V0_0_1("0.0.1", null, "v0_0_1/changeLog-pre.xml", "v0_0_1/changeLog-pos.xml");
 
+	public static SystemVersion LAST_VERSION =  SystemVersion.V0_0_1;
 	private static String localChangeLogPrefix = "/WEB-INF/";
 	private String versionCode;
 	private SystemVersion postVersionCode;
-	private String changeLog;
+	private String changeLogPre;
+	private String changeLogPos;
 
-	private SystemVersion(String versionCode, SystemVersion postVersionCode, String changeLog) {
+	private SystemVersion(String versionCode, SystemVersion postVersionCode, String changeLogPre, String changeLogPos) {
 		this.versionCode = versionCode;
 		this.postVersionCode = postVersionCode;
-		this.changeLog = changeLog;
+		this.changeLogPre = changeLogPre;
+		this.changeLogPos = changeLogPos;
 	}
 
 	public String getCode() {
@@ -23,19 +26,19 @@ public enum SystemVersion {
 		return postVersionCode;
 	}
 
-	public String getChangeLog() {
-		return localChangeLogPrefix + this.changeLog;
+	public String getChangeLogPre() {
+		return localChangeLogPrefix + this.changeLogPre;
 	}
 
-	public static SystemVersion valueOfCode(String code) {
+	public String getChangeLogPos() {
+		return localChangeLogPrefix + this.changeLogPos;
+	}
+	
+	public boolean hasChangeLogPre() {
+		return changeLogPre != null;
+	}
 
-		if (code != null) {
-			for (SystemVersion systemVersion : SystemVersion.values()) {
-				if (systemVersion.getCode().equals(code)) {
-					return systemVersion;
-				}
-			}
-		}
-		return null;
+	public boolean hasChangeLogPos() {
+		return changeLogPos != null;
 	}
 }

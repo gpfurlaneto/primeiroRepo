@@ -1,5 +1,6 @@
 package br.com.gpfurlaneto.user.core.rest;
 
+import javax.ejb.EJB;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -10,8 +11,8 @@ import br.com.gpfurlaneto.service.database.DatabaseService;
 @Path("/user")
 public class UserRest {
 
-	private DatabaseService databaseService = new DatabaseService();
-	
+	@EJB
+	private DatabaseService databaseService;
 	
 	@GET
 	@Produces("text/plain")

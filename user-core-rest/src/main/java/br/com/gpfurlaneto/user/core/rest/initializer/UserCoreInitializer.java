@@ -19,10 +19,9 @@ public class UserCoreInitializer implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 
-		String lastVersion = null;
 		if (!databaseService.isDatabaseUpdated()) {
-			lastVersion = databaseService.updateDatabase();
-			databaseService.updateDatabaseVersion(lastVersion);
+			databaseService.updateDatabase();
+			databaseService.updateDatabaseVersion();
 		}
 	}
 

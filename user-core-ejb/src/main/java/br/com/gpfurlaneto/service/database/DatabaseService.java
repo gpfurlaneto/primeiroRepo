@@ -1,6 +1,7 @@
 package br.com.gpfurlaneto.service.database;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
@@ -29,18 +30,18 @@ public class DatabaseService {
 	protected DataSource datasource;
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	public String updateDatabase() {
+	public void updateDatabase() {
 		try{
 			DatabaseBuilder builder = new DatabaseBuilder();
-			return builder.buildDatabase(datasource.getConnection());
+			builder.buildDatabase(datasource.getConnection());
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public void updateDatabaseVersion(String lastVersion){
+	public void updateDatabaseVersion(){
 		Setting setting = this.getLastVersionEntityFromDatabase();
-		setting.setValue(lastVersion);
+		setting.setValue(SystemVersion.getLastVersion().getCode());
 		em.merge(setting);
 	}
 	
@@ -51,19 +52,24 @@ public class DatabaseService {
 		.getSingleResult()).intValue() > 0;
 		
 		if (exists) {
-			SystemVersion lastVersion =  SystemVersion.LAST_VERSION;
-			return !getLastVersionFromDatabase().equals(lastVersion.getCode());
+			SystemVersion lastVersion =  SystemVersion.getLastVersion();
+			return getLastVersionFromDatabase().equals(lastVersion.getCode());
 		}
 		return exists;
 	}
 	
 	private Setting getLastVersionEntityFromDatabase() {
+		CriteriaQuery<Setting> criteria = getCriteriaLastVersion();
+		return em.createQuery(criteria).getSingleResult();
+	}
+
+	private CriteriaQuery<Setting> getCriteriaLastVersion() {
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Setting> criteria = builder.createQuery(Setting.class);
 		Root<Setting> selectRoot = criteria.from(Setting.class);
 		criteria.select(selectRoot);
 		criteria.where(builder.equal(selectRoot.get(Setting_.constant), UserCoreConstants.CONFIG_DATABASE_SYSTEM_VERSION) );
-		return em.createQuery(criteria).getSingleResult();
+		return criteria;
 	}
 	
 	public String getLastVersionFromDatabase() {

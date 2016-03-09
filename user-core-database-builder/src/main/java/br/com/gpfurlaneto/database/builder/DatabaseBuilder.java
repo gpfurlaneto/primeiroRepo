@@ -18,29 +18,28 @@ public class DatabaseBuilder {
 
 	public String buildDatabase(Connection connection) throws Exception {
 
-		SystemVersion newSystemVersion = SystemVersion.V0_0_1;
-		SystemVersion lastVersion = newSystemVersion;
-		
-		while (newSystemVersion != null) {
-			Database database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
-			
+		SystemVersion lastVersion = null;
+
+		for (SystemVersion newSystemVersion : SystemVersion.sequenceVersions) {
+
+			Database database = DatabaseFactory.getInstance()
+					.findCorrectDatabaseImplementation(new JdbcConnection(connection));
+
 			if (newSystemVersion.hasChangeLogPre()) {
-				Liquibase liquibase = new liquibase.Liquibase(newSystemVersion.getChangeLogPre(), new ClassLoaderResourceAccessor(), database);
+				Liquibase liquibase = new liquibase.Liquibase(newSystemVersion.getChangeLogPre(),
+						new ClassLoaderResourceAccessor(), database);
 				liquibase.update(new Contexts(), new LabelExpression());
 			}
-			
+
 			if (newSystemVersion.hasChangeLogPos()) {
-				Liquibase liquibase = new liquibase.Liquibase(newSystemVersion.getChangeLogPos(), new ClassLoaderResourceAccessor(), database);
+				Liquibase liquibase = new liquibase.Liquibase(newSystemVersion.getChangeLogPos(),
+						new ClassLoaderResourceAccessor(), database);
 				liquibase.update(new Contexts(), new LabelExpression());
-				
+
 			}
-			
-			newSystemVersion = newSystemVersion.getPostSystemVersion();
-			if (newSystemVersion != null) {
-				lastVersion = newSystemVersion;
-			}
+			lastVersion = newSystemVersion;
 		}
 		return lastVersion.getCode();
-		
 	}
+
 }

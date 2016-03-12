@@ -24,7 +24,6 @@
 			<groupId>br.com.gpfurlaneto</groupId>
 			<artifactId>user-core-database-builder</artifactId>
 			<version>1.0-SNAPSHOT</version>
-			<type>jar</type>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.spec.javax.ejb</groupId>

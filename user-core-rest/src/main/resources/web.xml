@@ -10,6 +10,10 @@
 		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
 
 		<init-param>
+			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
 			<param-name>com.sun.jersey.config.property.packages</param-name>
 			<param-value>br.com.gpfurlaneto.user.core.rest</param-value>
 		</init-param>
@@ -20,7 +24,7 @@
 		<servlet-name>Jersey Web Application</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
-	
+
 	<listener>
 		<display-name>UserCoreInitializer</display-name>
 		<listener-class>br.com.gpfurlaneto.user.core.rest.initializer.UserCoreInitializer</listener-class>

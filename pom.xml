@@ -13,4 +13,5 @@
 		<module>user-core-database-builder</module>
 		<module>user-core-common</module>
 	</modules>
+</project>
 

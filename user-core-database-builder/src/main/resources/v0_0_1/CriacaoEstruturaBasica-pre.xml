@@ -12,7 +12,13 @@
 			<column name="NM_USER" type="varchar(150)">
 				<constraints nullable="false" />
 			</column>
-			<column name="ST_ATIVO" type="boolean" defaultValueBoolean="true">
+			<column name="DT_NASCIMENTO" type="DATETIME">
+				<constraints nullable="false" />
+			</column><column name="DS_EMAIL" type="varchar(100)">
+				<constraints nullable="false" />
+			</column><column name="DS_LOGIN" type="varchar(20)">
+				<constraints nullable="false" />
+			</column><column name="DS_SENHA" type="varchar(10)">
 				<constraints nullable="false" />
 			</column>
 		</createTable>

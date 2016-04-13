@@ -10,6 +10,11 @@ public class UserDto {
 	private String email;
 	private String login;
 	private String senha;
+	
+	public UserDto(Long id, String nome) {
+		this.id = id;
+		this.nome = nome;
+	}
 
 	public Long getId() {
 		return id;

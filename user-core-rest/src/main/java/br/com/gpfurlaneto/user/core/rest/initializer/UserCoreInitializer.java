@@ -3,9 +3,11 @@ package br.com.gpfurlaneto.user.core.rest.initializer;
 import javax.ejb.EJB;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 
-import br.com.gpfurlaneto.service.database.DatabaseService;
+import br.com.gpfurlaneto.DatabaseService;
 
+@WebListener
 public class UserCoreInitializer implements ServletContextListener {
 
 	@EJB

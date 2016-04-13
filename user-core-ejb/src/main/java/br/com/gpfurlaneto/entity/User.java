@@ -1,4 +1,4 @@
-package br.com.gpfurlaneto.constants.entity;
+package br.com.gpfurlaneto.entity;
 
 import java.util.Date;
 

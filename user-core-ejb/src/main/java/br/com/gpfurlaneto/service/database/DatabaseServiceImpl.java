@@ -1,9 +1,9 @@
 package br.com.gpfurlaneto.service.database;
 
 import java.math.BigInteger;
-import java.util.List;
 
 import javax.annotation.Resource;
+import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -14,14 +14,15 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.sql.DataSource;
 
+import br.com.gpfurlaneto.DatabaseService;
 import br.com.gpfurlaneto.constants.UserCoreConstants;
-import br.com.gpfurlaneto.constants.entity.Setting;
-import br.com.gpfurlaneto.constants.entity.Setting_;
 import br.com.gpfurlaneto.database.builder.DatabaseBuilder;
 import br.com.gpfurlaneto.database.version.SystemVersion;
+import br.com.gpfurlaneto.entity.Setting;
+import br.com.gpfurlaneto.entity.Setting_;
 
 @Stateless
-public class DatabaseService {
+public class DatabaseServiceImpl implements DatabaseService{
 
 	@PersistenceContext(unitName = UserCoreConstants.CONFIG_DATABASE_PERSISTENCE_CONTEXT_UNIT_NAME)
 	private EntityManager em;

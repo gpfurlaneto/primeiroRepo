@@ -11,8 +11,8 @@
 	</parent>
 
 	<artifactId>user-core-common</artifactId>
-	<packaging>jar</packaging>
 	<name>user-core-common</name>
+	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>

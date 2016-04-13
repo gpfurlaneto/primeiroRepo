@@ -17,7 +17,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.gpfurlaneto</groupId>
-			<artifactId>user-core-ejb</artifactId>
+			<artifactId>user-core-ejb-impl</artifactId>
 			<version>1.0-SNAPSHOT</version>
 			<type>ejb</type>
 			<exclusions>
@@ -58,8 +58,8 @@
 					<modules>
 						<ejbModule>
 							<groupId>br.com.gpfurlaneto</groupId>
-							<artifactId>user-core-ejb</artifactId>
-							<bundleFileName>user-core-ejb.jar</bundleFileName>
+							<artifactId>user-core-ejb-impl</artifactId>
+							<bundleFileName>user-core-ejb-impl.jar</bundleFileName>
 							<unpack>false</unpack>
 						</ejbModule>
 						<webModule>

@@ -89,13 +89,13 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
-				<dependencies>
+				<!-- <dependencies>
 					<dependency>
 						<groupId>br.com.gpfurlaneto</groupId>
 						<artifactId>user-core-ejb</artifactId>
 						<version>1.0-SNAPSHOT</version>
 					</dependency>
-				</dependencies>
+				</dependencies> -->
 			</plugin>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>

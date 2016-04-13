@@ -9,9 +9,9 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>user-core-ejb</artifactId>
+	<artifactId>user-core-ejb-impl</artifactId>
 	<packaging>ejb</packaging>
-	<name>user-core-ejb</name>
+	<name>user-core-ejb-impl</name>
 
 	<dependencies>
 		<dependency>

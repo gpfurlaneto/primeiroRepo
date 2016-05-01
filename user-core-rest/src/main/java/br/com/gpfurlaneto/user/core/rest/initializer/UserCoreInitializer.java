@@ -1,5 +1,7 @@
 package br.com.gpfurlaneto.user.core.rest.initializer;
 
+import java.util.Locale;
+
 import javax.ejb.EJB;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -25,6 +27,8 @@ public class UserCoreInitializer implements ServletContextListener {
 			databaseService.updateDatabase();
 			databaseService.updateDatabaseVersion();
 		}
+		
+		Locale.setDefault(new Locale("pt", "BR"));
 	}
 
 }

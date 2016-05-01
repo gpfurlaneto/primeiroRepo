@@ -2,18 +2,32 @@ package br.com.gpfurlaneto.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import br.com.gpfurlaneto.constants.UserCoreCommonConstants;
+
 public class UserDto {
 
 	private Long id;
 	private String nome;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = UserCoreCommonConstants.DATE_PATTERN)
 	private Date dataNascimento;
 	private String email;
 	private String login;
 	private String senha;
 	
-	public UserDto(Long id, String nome) {
+	public UserDto() {
+	}
+	
+	public UserDto(Long id, String nome, Date dataNascimento, String email, String login, String senha) {
+		super();
 		this.id = id;
 		this.nome = nome;
+		this.dataNascimento = dataNascimento;
+		this.email = email;
+		this.login = login;
+		this.senha = senha;
 	}
 
 	public Long getId() {

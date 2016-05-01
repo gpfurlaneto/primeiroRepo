@@ -9,7 +9,6 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<groupId>br.com.gpfurlaneto</groupId>
 	<artifactId>user-core-rest</artifactId>
 	<packaging>war</packaging>
 	<name>user-core-rest</name>
@@ -29,31 +28,22 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-server</artifactId>
-			<version>1.18.4</version>
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet-core</artifactId>
+			<version>2.22.2</version>
 		</dependency>
 		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-core</artifactId>
-			<version>1.18.4</version>
+			<groupId>org.glassfish.jersey.ext</groupId>
+			<artifactId>jersey-bean-validation</artifactId>
+			<version>2.22.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-validator</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-servlet</artifactId>
-			<version>1.18.4</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-json</artifactId>
-			<version>1.18.4</version>
-		</dependency> -->
-		<dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-servlet-core</artifactId>
-            <version>2.22.2</version>
-            </dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
@@ -70,16 +60,22 @@
 			<artifactId>user-core-ejb-api</artifactId>
 			<version>1.0-SNAPSHOT</version>
 			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>br.com.gpfurlaneto</groupId>
+					<artifactId>user-core-common</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>br.com.gpfurlaneto</groupId>
 			<artifactId>user-core-common</artifactId>
 			<version>1.0-SNAPSHOT</version>
 			<type>jar</type>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	<build>
-
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -89,13 +85,6 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
-				<!-- <dependencies>
-					<dependency>
-						<groupId>br.com.gpfurlaneto</groupId>
-						<artifactId>user-core-ejb</artifactId>
-						<version>1.0-SNAPSHOT</version>
-					</dependency>
-				</dependencies> -->
 			</plugin>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>

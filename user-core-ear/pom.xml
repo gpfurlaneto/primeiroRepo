@@ -26,6 +26,14 @@
 					<artifactId>hibernate-entitymanager</artifactId>
 				</exclusion>
 				<exclusion>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-validator</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-validator-cdi</artifactId>
+				</exclusion>
+				<exclusion>
 					<groupId>org.jboss.spec.javax.ejb</groupId>
 					<artifactId>jboss-ejb-api_3.1_spec</artifactId>
 				</exclusion>

@@ -9,6 +9,10 @@ import br.com.gpfurlaneto.dto.UserDto;
 @Local
 public interface UserService {
 
-	List<UserDto> findAll();
+	List<UserDto> listAll();
+
+	void save(UserDto userDto);
+
+	void delete(Long id);
 
 }

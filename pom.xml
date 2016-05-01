@@ -13,6 +13,6 @@
 		<module>user-core-rest</module>
 		<module>user-core-database-builder</module>
 		<module>user-core-common</module>
-    <module>user-core-ear</module>
+    	<module>user-core-ear</module>
   </modules>
 </project>

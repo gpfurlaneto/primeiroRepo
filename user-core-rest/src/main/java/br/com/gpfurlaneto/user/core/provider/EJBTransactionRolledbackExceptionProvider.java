@@ -1,4 +1,4 @@
-package br.com.gpfurlaneto.user.core.rest;
+package br.com.gpfurlaneto.user.core.provider;
 
 import java.util.ArrayList;
 import java.util.List;

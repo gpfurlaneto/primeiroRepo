@@ -18,7 +18,7 @@
 				<constraints nullable="false" />
 			</column><column name="DS_LOGIN" type="varchar(20)">
 				<constraints nullable="false" />
-			</column><column name="DS_SENHA" type="varchar(10)">
+			</column><column name="DS_SENHA" type="varchar(40)">
 				<constraints nullable="false" />
 			</column>
 		</createTable>

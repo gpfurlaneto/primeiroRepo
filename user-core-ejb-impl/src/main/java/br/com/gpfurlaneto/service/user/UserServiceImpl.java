@@ -17,6 +17,7 @@ import br.com.gpfurlaneto.constants.UserCoreConstants;
 import br.com.gpfurlaneto.dto.UserDto;
 import br.com.gpfurlaneto.entity.User;
 import br.com.gpfurlaneto.entity.User_;
+import br.com.gpfurlaneto.util.MessageDigestUtil;
 
 @Stateless
 public class UserServiceImpl implements UserService{
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService{
 	public List<UserDto> listAll(){
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<UserDto> criteria = builder.createQuery( UserDto.class );
-		Root<User> userRoot = criteria.from( User.class );
+		Root<User> userRoot = criteria.from(User.class);
 		
 		criteria.select(
 			    builder.construct(
@@ -36,8 +37,7 @@ public class UserServiceImpl implements UserService{
 			        userRoot.get( User_.nome),
 			        userRoot.get( User_.dataNascimento),
 			        userRoot.get( User_.email),
-			        userRoot.get( User_.login),
-			        userRoot.get( User_.senha)
+			        userRoot.get( User_.login)
 			    )
 			);
 		
@@ -45,10 +45,11 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void save(UserDto userDto) {
+	public void save(UserDto userDto) throws Exception {
 		User user = null;
 		if (userDto.getId() == null) {
 			user = new User();
+			user.setSenha(MessageDigestUtil.encrypt(userDto.getSenha()));
 		}else{
 			user = em.find(User.class, userDto.getId());
 		}
@@ -57,7 +58,6 @@ public class UserServiceImpl implements UserService{
 		user.setEmail(userDto.getEmail());
 		user.setLogin(userDto.getLogin());
 		user.setNome(userDto.getNome());
-		user.setSenha(userDto.getSenha());
 		em.merge(user);
 	}
 

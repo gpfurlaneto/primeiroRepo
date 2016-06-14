@@ -11,7 +11,7 @@ public interface UserService {
 
 	List<UserDto> listAll();
 
-	void save(UserDto userDto);
+	void save(UserDto userDto) throws Exception;
 
 	void delete(Long id);
 

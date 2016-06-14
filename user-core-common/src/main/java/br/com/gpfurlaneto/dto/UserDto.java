@@ -16,18 +16,25 @@ public class UserDto {
 	private String email;
 	private String login;
 	private String senha;
+	private String token;
 	
 	public UserDto() {
 	}
 	
-	public UserDto(Long id, String nome, Date dataNascimento, String email, String login, String senha) {
+	public UserDto(Long id, String nome, Date dataNascimento, String email, String login) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.email = email;
 		this.login = login;
-		this.senha = senha;
+	}
+
+	public UserDto(Long id, String nome, String login) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.login = login;
 	}
 
 	public Long getId() {
@@ -37,7 +44,7 @@ public class UserDto {
 		this.id = id;
 	}
 	public String getNome() {
-		return nome;
+		return nome;	
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -65,5 +72,11 @@ public class UserDto {
 	}
 	public void setLogin(String login) {
 		this.login = login;
+	}
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
 	}
 }

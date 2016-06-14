@@ -33,8 +33,13 @@ public class UserRest {
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void saveUser(UserDto userDto) {
-		userService.save(userDto);
+	public Response saveUser(UserDto userDto) {
+		try {
+			userService.save(userDto);
+			return Response.status(Response.Status.OK).build();
+		} catch (Exception e) {
+			return Response.accepted(e).status(Response.Status.BAD_REQUEST).build();
+		}
 	}
 
 	@DELETE

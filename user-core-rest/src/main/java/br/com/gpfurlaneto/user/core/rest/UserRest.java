@@ -16,7 +16,9 @@ import javax.ws.rs.core.Response;
 
 import br.com.gpfurlaneto.UserService;
 import br.com.gpfurlaneto.dto.UserDto;
+import br.com.gpfurlaneto.user.core.annotation.LoginRequired;
 
+@LoginRequired
 @Stateless
 @Path("/user")
 public class UserRest {

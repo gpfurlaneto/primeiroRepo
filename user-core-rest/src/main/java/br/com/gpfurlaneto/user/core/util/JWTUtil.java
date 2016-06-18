@@ -10,7 +10,11 @@ public class JWTUtil {
 	private static final String KEY_APP = "key_lista_usuarios_app";
 
 	public static String getToken(UserDto userDto) {
-		return Jwts.builder().setSubject(userDto.getLogin())
+		return getToken(userDto.getEmail());
+	}
+	
+	public static String getToken(String email){
+		return Jwts.builder().setSubject(email)
 				.signWith(SignatureAlgorithm.HS256, TextCodec.BASE64.encode(KEY_APP))
 				.compact();
 	}

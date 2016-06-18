@@ -52,7 +52,7 @@ public class LoginServiceImpl implements LoginService{
 			        UserDto.class,
 			        userRoot.get( User_.id),
 			        userRoot.get( User_.nome),
-			        userRoot.get( User_.login)
+			        userRoot.get( User_.email)
 			    )
 			);
 		

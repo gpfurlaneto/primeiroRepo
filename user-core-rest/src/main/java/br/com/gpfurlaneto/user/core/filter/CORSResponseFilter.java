@@ -17,7 +17,7 @@ public class CORSResponseFilter implements ContainerResponseFilter {
 	        responseContext.getHeaders().putSingle("Access-Control-Allow-Origin", "http://localhost:8000");
 	        responseContext.getHeaders().putSingle("Access-Control-Allow-Credentials", "true");
 	        responseContext.getHeaders().putSingle("Access-Control-Allow-Methods", "DELETE, *");
-	        responseContext.getHeaders().putSingle("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With");
+	        responseContext.getHeaders().putSingle("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, Authorization");
 	}
 
 }

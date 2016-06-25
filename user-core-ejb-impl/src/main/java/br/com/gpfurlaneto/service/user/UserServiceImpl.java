@@ -3,14 +3,13 @@ package br.com.gpfurlaneto.service.user;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
-import javax.validation.Valid;
-import javax.validation.Validator;
 
 import br.com.gpfurlaneto.UserService;
 import br.com.gpfurlaneto.constants.UserCoreConstants;
@@ -25,6 +24,7 @@ public class UserServiceImpl implements UserService{
 	@PersistenceContext(unitName = UserCoreConstants.CONFIG_DATABASE_PERSISTENCE_CONTEXT_UNIT_NAME)
 	private EntityManager em;
 	
+	@Override
 	public List<UserDto> listAll(){
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<UserDto> criteria = builder.createQuery( UserDto.class );
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService{
 			    )
 			);
 		
-		return em.createQuery( criteria ).getResultList();
+		return em.createQuery(criteria).getResultList();
 	}
 
 	@Override
@@ -65,5 +65,17 @@ public class UserServiceImpl implements UserService{
 	public void delete(Long id) {
 		em.remove(em.getReference(User.class, id));
 	}
-	
+
+	@Override
+	public String resetPassword(Long id) throws Exception {
+		String newPassword = "123456"; 
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaUpdate<User> update = builder.createCriteriaUpdate(User.class);
+		Root<User> from = update.from(User.class);
+		update.set(User_.senha, MessageDigestUtil.encrypt(newPassword));
+		update.where(builder.equal(from.get(User_.id), id));
+		Query query = em.createQuery(update);
+		query.executeUpdate();
+		return newPassword;
+	}
 }

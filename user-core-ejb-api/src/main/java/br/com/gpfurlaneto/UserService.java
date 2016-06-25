@@ -15,4 +15,6 @@ public interface UserService {
 
 	void delete(Long id);
 
+	String resetPassword(Long id) throws Exception;
+
 }

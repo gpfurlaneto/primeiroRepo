@@ -17,10 +17,11 @@ import javax.ws.rs.core.Response;
 import br.com.gpfurlaneto.UserService;
 import br.com.gpfurlaneto.dto.UserDto;
 import br.com.gpfurlaneto.user.core.annotation.LoginRequired;
+import br.com.gpfurlaneto.user.core.util.JWTUtil;
 
 @LoginRequired
 @Stateless
-@Path("/user")
+@Path("/usuario")
 public class UserRest {
 
 	@Inject
@@ -44,6 +45,18 @@ public class UserRest {
 		}
 	}
 
+	@POST
+	@Path("/resetsenha/{id}")
+	@Produces(MediaType.TEXT_HTML)
+	public Response resetPassword(@PathParam("id") Long id) {
+		try {
+			String newPassword = userService.resetPassword(id);
+			return Response.status(Response.Status.OK).entity(newPassword).build();
+		} catch (Exception e) {
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+	
 	@DELETE
 	@Path("/{id}")
 	public void delete(@PathParam("id") Long id){

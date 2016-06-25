@@ -6,7 +6,7 @@
 
 	<changeSet id="1" author="Guilherm Furlaneto">
 		<createTable tableName="TB_USER">
-			<column name="ID_USER" type="long">
+			<column name="ID_USER" type="numeric(10,0)" >
 				<constraints primaryKey="true" nullable="false" />
 			</column>
 			<column name="NM_USER" type="varchar(150)">
@@ -18,12 +18,12 @@
 				<constraints nullable="false" />
 			</column><column name="DS_LOGIN" type="varchar(20)">
 				<constraints nullable="false" />
-			</column><column name="DS_SENHA" type="varchar(40)">
+			</column><column name="DS_SENHA" type="varchar(100)">
 				<constraints nullable="false" />
 			</column>
 		</createTable>
 		<createTable tableName="TB_SETTING">
-			<column name="ID_SETTING" type="long">
+			<column name="ID_SETTING" type="numeric(10,0)">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
 			<column name="NM_SETTING" type="varchar(50)">

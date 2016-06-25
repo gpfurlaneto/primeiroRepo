@@ -73,6 +73,9 @@
 						<webModule>
 							<groupId>br.com.gpfurlaneto</groupId>
 							<artifactId>user-core-rest</artifactId>
+							<bundleFileName>user-core-rest-1.0-SNAPSHOT.war</bundleFileName>
+							<unpack>false</unpack>
+							<contextRoot>/user-core-rest</contextRoot>
 							<unpack>false</unpack>
 						</webModule>
 					</modules>

@@ -1,4 +1,4 @@
-package br.com.gpfurlaneto.service.database;
+package br.com.gpfurlaneto.service;
 
 import java.math.BigInteger;
 

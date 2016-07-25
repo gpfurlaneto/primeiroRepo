@@ -1,4 +1,4 @@
-package br.com.gpfurlaneto.service.user;
+package br.com.gpfurlaneto.service;
 
 import java.util.List;
 

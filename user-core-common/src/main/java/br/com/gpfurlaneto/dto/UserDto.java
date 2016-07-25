@@ -30,11 +30,12 @@ public class UserDto {
 		this.login = login;
 	}
 
-	public UserDto(Long id, String nome, String email) {
+	public UserDto(Long id, String nome, String email, String login) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
+		this.login = login;
 	}
 
 	public Long getId() {

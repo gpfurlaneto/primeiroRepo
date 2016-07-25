@@ -1,4 +1,4 @@
-package br.com.gpfurlaneto.service.login;
+package br.com.gpfurlaneto.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,7 +52,8 @@ public class LoginServiceImpl implements LoginService{
 			        UserDto.class,
 			        userRoot.get( User_.id),
 			        userRoot.get( User_.nome),
-			        userRoot.get( User_.email)
+			        userRoot.get( User_.email),
+			        userRoot.get( User_.login)
 			    )
 			);
 		

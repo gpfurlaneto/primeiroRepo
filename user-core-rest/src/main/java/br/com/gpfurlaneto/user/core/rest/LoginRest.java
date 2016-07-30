@@ -32,7 +32,7 @@ public class LoginRest {
 			userDto.setToken(JWTUtil.getToken(userDto));
 			return getResponse(userDto, Response.Status.OK).build();
 		}catch(LoginException e){
-			return getResponse(e.getErrors(), Response.Status.BAD_REQUEST).build();
+			return getResponse(e.getErrors().values(), Response.Status.OK).build();
 		} catch (Exception e) {
 			return getResponse(e, Response.Status.BAD_REQUEST).build();
 		}

@@ -9,9 +9,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
+import org.apache.commons.lang.StringUtils;
+
 import br.com.gpfurlaneto.user.core.annotation.LoginRequired;
 import br.com.gpfurlaneto.user.core.util.JWTUtil;
-import br.com.gpfurlaneto.util.StringUtil;
 
 @Provider
 public class AuthorizationRequestFilter implements ContainerRequestFilter {
@@ -32,7 +33,7 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
 
 	private void validateAuthentication(ContainerRequestContext requestContext) {
 		String authorizationHeader = requestContext.getHeaderString(AUTHORIZATION);
-		if (StringUtil.isNull(authorizationHeader)) {
+		if (StringUtils.isBlank(authorizationHeader)) {
 			responseCanNotAccess(requestContext);
 		}else{
 			String[] emailToken = authorizationHeader.split(" ");

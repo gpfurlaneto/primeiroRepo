@@ -2,9 +2,6 @@ package br.com.gpfurlaneto.database.builder;
 
 import java.sql.Connection;
 
-import javax.annotation.Resource;
-import javax.sql.DataSource;
-
 import br.com.gpfurlaneto.database.version.SystemVersion;
 import liquibase.Contexts;
 import liquibase.LabelExpression;

@@ -7,5 +7,5 @@ import br.com.gpfurlaneto.dto.AlterarSenhaDto;
 @Local
 public interface ChangePasswordService {
 
-	void changePassword(AlterarSenhaDto alterarSenhaDto);
+	void changePassword(AlterarSenhaDto alterarSenhaDto) throws Exception;
 }

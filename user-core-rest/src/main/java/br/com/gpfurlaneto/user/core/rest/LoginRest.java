@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response.Status;
 
 import br.com.gpfurlaneto.LoginService;
 import br.com.gpfurlaneto.dto.UserDto;
-import br.com.gpfurlaneto.exception.LoginException;
+import br.com.gpfurlaneto.exception.FormException;
 import br.com.gpfurlaneto.user.core.util.JWTUtil;
 
 @Stateless
@@ -31,7 +31,7 @@ public class LoginRest {
 			userDto = loginService.authenticate(userDto);
 			userDto.setToken(JWTUtil.getToken(userDto));
 			return getResponse(userDto, Response.Status.OK).build();
-		}catch(LoginException e){
+		}catch(FormException e){
 			return getResponse(e.getErrors().values(), Response.Status.OK).build();
 		} catch (Exception e) {
 			return getResponse(e, Response.Status.BAD_REQUEST).build();

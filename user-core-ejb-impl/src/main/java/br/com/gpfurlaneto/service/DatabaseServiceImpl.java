@@ -3,7 +3,6 @@ package br.com.gpfurlaneto.service;
 import java.math.BigInteger;
 
 import javax.annotation.Resource;
-import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;

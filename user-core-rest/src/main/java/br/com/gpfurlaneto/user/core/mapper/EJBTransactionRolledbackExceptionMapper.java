@@ -1,4 +1,4 @@
-package br.com.gpfurlaneto.user.core.provider;
+package br.com.gpfurlaneto.user.core.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import org.glassfish.jersey.server.validation.ValidationError;
 import org.glassfish.jersey.server.validation.internal.ValidationHelper;
 
 @Provider
-public class EJBTransactionRolledbackExceptionProvider implements ExceptionMapper<EJBTransactionRolledbackException> {
+public class EJBTransactionRolledbackExceptionMapper implements ExceptionMapper<EJBTransactionRolledbackException> {
 
 	@Override
 	public Response toResponse(EJBTransactionRolledbackException exception) {

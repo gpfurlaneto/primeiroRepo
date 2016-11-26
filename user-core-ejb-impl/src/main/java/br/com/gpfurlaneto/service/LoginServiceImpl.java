@@ -9,16 +9,18 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+
+import org.apache.commons.lang.StringUtils;
 
 import br.com.gpfurlaneto.LoginService;
 import br.com.gpfurlaneto.constants.UserCoreConstants;
 import br.com.gpfurlaneto.dto.UserDto;
 import br.com.gpfurlaneto.entity.User;
 import br.com.gpfurlaneto.entity.User_;
-import br.com.gpfurlaneto.exception.LoginException;
+import br.com.gpfurlaneto.exception.FormException;
 import br.com.gpfurlaneto.util.MessageDigestUtil;
-import br.com.gpfurlaneto.util.StringUtil;
 
 @Stateless
 public class LoginServiceImpl implements LoginService{
@@ -27,7 +29,7 @@ public class LoginServiceImpl implements LoginService{
 	private EntityManager em;
 	
 	@Override
-	public UserDto authenticate(UserDto userDto) throws LoginException, Exception {
+	public UserDto authenticate(UserDto userDto) throws FormException, Exception {
 		validateUser(userDto);
 		userDto.setSenha(MessageDigestUtil.encrypt(userDto.getSenha()));
 		try {
@@ -44,32 +46,36 @@ public class LoginServiceImpl implements LoginService{
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<UserDto> criteria = builder.createQuery( UserDto.class );
 		Root<User> userRoot = criteria.from(User.class);
-		criteria.where(builder.equal(userRoot.get(User_.login), userDto.getLogin()));
-		criteria.where(builder.equal(userRoot.get(User_.senha), userDto.getSenha()));
+		criteria.where(
+				builder.and(
+							builder.equal(userRoot.get(User_.login), userDto.getLogin()), 
+							builder.equal(userRoot.get(User_.senha), userDto.getSenha())
+							)
+						);
 		
 		criteria.select(
 			    builder.construct(
 			        UserDto.class,
-			        userRoot.get( User_.id),
-			        userRoot.get( User_.nome),
-			        userRoot.get( User_.email),
-			        userRoot.get( User_.login)
+			        userRoot.get(User_.id),
+			        userRoot.get(User_.nome),
+			        userRoot.get(User_.email),
+			        userRoot.get(User_.login)
 			    )
 			);
 		
-		return em.createQuery( criteria ).getSingleResult();
+		return em.createQuery(criteria).getSingleResult();
 	}
 
-	private void validateUser(UserDto userDto) throws LoginException {
+	private void validateUser(UserDto userDto) throws FormException {
 		Map<String, String> errors = new HashMap<String, String>();
-		if (StringUtil.isNull(userDto.getLogin())) {
+		if (StringUtils.isBlank(userDto.getLogin())) {
 			errors.put("login", "Não pode ser vazio");
 		}
-		if (StringUtil.isNull(userDto.getSenha())) {
+		if (StringUtils.isBlank(userDto.getSenha())) {
 			errors.put("senha", "Não pode ser vazio");
 		}
 		if (!errors.isEmpty()) {
-			throw new LoginException(errors);
+			throw new FormException(errors);
 		}
 	}
 }

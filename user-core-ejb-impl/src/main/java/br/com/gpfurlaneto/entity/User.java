@@ -20,7 +20,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator ="SQ_USER")
-	@SequenceGenerator(sequenceName="SQ_USER",  name="SQ_USER", initialValue=1, allocationSize=100)
+	@SequenceGenerator(sequenceName="SQ_USER",  name="SQ_USER", initialValue=1, allocationSize=1)
 	@Column(name="ID_USER")
 	private Long id;
 

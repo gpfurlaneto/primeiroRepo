@@ -35,13 +35,9 @@ public class UserRest {
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response saveUser(UserDto userDto) {
-		try {
-			userService.save(userDto);
-			return Response.status(Response.Status.OK).build();
-		} catch (Exception e) {
-			return Response.accepted(e).status(Response.Status.BAD_REQUEST).build();
-		}
+	public Response saveUser(UserDto userDto) throws Exception {
+		userService.save(userDto);
+		return Response.status(Response.Status.OK).build();
 	}
 
 	@POST
@@ -55,10 +51,10 @@ public class UserRest {
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@DELETE
 	@Path("/{id}")
-	public void delete(@PathParam("id") Long id){
+	public void delete(@PathParam("id") Long id) {
 		userService.delete(id);
 	}
 }

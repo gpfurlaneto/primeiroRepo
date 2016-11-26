@@ -21,7 +21,7 @@ public class AutoRegisterRest {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response saveUser(UserDto userDto) {
+	public Response saveUser(UserDto userDto) throws Exception {
 		if (userDto.getId() != null) {
 			ValidationError var = new ValidationError("Erro! você não ter permissões para esta alteração", "", null, null);
 			return Response.accepted(var).status(Response.Status.BAD_REQUEST).build();

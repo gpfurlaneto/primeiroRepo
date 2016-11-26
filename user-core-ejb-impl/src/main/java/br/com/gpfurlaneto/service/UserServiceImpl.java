@@ -16,6 +16,7 @@ import br.com.gpfurlaneto.constants.UserCoreConstants;
 import br.com.gpfurlaneto.dto.UserDto;
 import br.com.gpfurlaneto.entity.User;
 import br.com.gpfurlaneto.entity.User_;
+import br.com.gpfurlaneto.exception.FormException;
 import br.com.gpfurlaneto.util.MessageDigestUtil;
 
 @Stateless
@@ -46,6 +47,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void save(UserDto userDto) throws Exception {
+		validateUser(userDto);
 		User user = null;
 		if (userDto.getId() == null) {
 			user = new User();
@@ -59,6 +61,35 @@ public class UserServiceImpl implements UserService{
 		user.setLogin(userDto.getLogin());
 		user.setNome(userDto.getNome());
 		em.merge(user);
+	}
+
+	private void validateUser(UserDto userDto) throws FormException {
+		List<User> users = loadUser(userDto);
+		if (users != null && !users.isEmpty()) {
+			User user = users.get(0);
+			FormException exception = new FormException();
+			if (user.getLogin().equals(userDto.getLogin())) {
+				exception.putError("login", "já está sendo utilizado");
+			}
+			if (user.getEmail().equals(userDto.getEmail())) {
+				exception.putError("email", "já está sendo utilizado");
+			}
+			throw exception;
+		}
+	}
+
+	private List<User> loadUser(UserDto userDto) {
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<User> criteria = builder.createQuery( User.class );
+		Root<User> userRoot = criteria.from(User.class);
+		criteria.where(
+				builder.or(
+							builder.equal(userRoot.get(User_.login), userDto.getLogin()), 
+							builder.equal(userRoot.get(User_.email), userDto.getEmail())
+							)
+						);
+		
+		return em.createQuery(criteria).getResultList();
 	}
 
 	@Override
